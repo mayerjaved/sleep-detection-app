@@ -23,11 +23,11 @@ export default function App() {
     return <Text>No access to camera</Text>;
   }
 
-  async function playSound() { //this function used to play the sound
-    const { sound } = await Audio.Sound.createAsync( // javascript promise  to await if whole 
+  async function playSound() { 
+    const { sound } = await Audio.Sound.createAsync( // javascript promise to await 
       require("./assets/alarm.mp3")
     );
-    setSound(sound); // we are  storing sound to remove this listner after the screen unmount
+    setSound(sound); 
 
     await sound.playAsync(); //this functions runs the sound
   }
@@ -48,15 +48,15 @@ export default function App() {
     setEyesShut(eyesShut) // here we store the current eyer status
   };
 
-  //this is the main useEffect which play sound after every 1000
+  //this is the main useEffect which play sound after every 1000ms
   // it runs when the status of evesShut changes.
   useEffect(() => {
     if(eyesShut){
-      sub = setInterval(() => { //we give setInterval 2 things one is interval and other is function which runs after the interval so according to our logic sound player after the interval we have given
+      sub = setInterval(() => { 
         playSound()
       }, 1000);
     }else{
-      clearInterval(sub) // if eyesshut becomes false we will cancel the interval which is going to plays sound after certain interval
+      clearInterval(sub) // if eyesshut becomes false we will cancel the interval which is going to play sound after a certain interval
     }
 
   }, [eyesShut])
